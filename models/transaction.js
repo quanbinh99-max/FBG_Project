@@ -1,23 +1,19 @@
 const mongoose = require('mongoose');
 
-const StatusEnum = {
-	PENDING: 'Chưa thanh toán',
-	SUCCESS: 'Đã thanh toán',
-	CANCELED: 'Đã huỷ'
-};
-
 const TransactionSchema = new mongoose.Schema({
 	participant_id: {
 		type: mongoose.Schema.Types.ObjectId,
-		ref: 'participants'
+		ref: 'participants',
+		unique: [true, 'Mỗi người chỉ được mua một vé']
 	},
 	ticket_id: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'ticketDetails'
 	},
 	paymentStatus: {
-		type: StatusEnum,
-		default: StatusEnum.PENDING
+		type: String,
+		enum: ['Chưa thanh toán', 'Đã thanh toán'],
+		default: 'Chưa thanh toán'
 	},
 	created_at: { type: Date, required: true },
 	updated_at: { type: Date, required: true }
