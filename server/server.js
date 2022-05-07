@@ -13,6 +13,7 @@ const nextApp = next({ dev });
 const nextHandler = nextApp.getRequestHandler();
 
 const port = process.env.PORT || 5000;
+const indexRoute = require("./routes/index");
 
 nextApp.prepare().then(() => {
   app.use(express.urlencoded({ extended: true }));
@@ -41,6 +42,7 @@ nextApp.prepare().then(() => {
     })
   );
 
+  app.use("/api", indexRoute);
   app.all("*", (req, res) => {
     return nextHandler(req, res);
   });
