@@ -1,16 +1,11 @@
 const mongoose = require('mongoose');
 
-const TypeEnum = {
-	TYPE_1: 'Loại 1',
-	TYPE_2: 'Loại 2',
-	TYPE_3: 'Loại 3'
-};
-
 const TicketSchema = new mongoose.Schema({
 	type: {
-		type: TypeEnum,
+		type: String,
 		required: true,
-		unique: true
+		unique: true,
+		enum: ['Loại 1', 'Loại 2', 'Loại 3']
 	},
 	quantity: {
 		type: Number,

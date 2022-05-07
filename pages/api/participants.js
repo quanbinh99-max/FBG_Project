@@ -12,7 +12,6 @@ export default async function handler(req, res) {
 
 		if (req.method === 'POST') {
 			const { email, name, phoneNumber, school, studentID } = req.body;
-
 			await Participant.create({
 				email,
 				name,
