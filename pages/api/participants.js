@@ -12,17 +12,26 @@ export default async function handler(req, res) {
 
 		if (req.method === 'POST') {
 			const { email, name, phoneNumber, school, studentID } = req.body;
-			await Participant.create({
-				email,
-				name,
-				phoneNumber,
-				school,
-				studentID,
-				created_at,
-				updated_at
-			});
+			var participant;
+			await Promise.all(
+				(participant = Participant.findOne({
+					$or: [{ email: email }, { phoneNumber: phoneNumber }]
+				}))
+			);
+			if (participant != null) {
+			} else {
+				await Participant.create({
+					email,
+					name,
+					phoneNumber,
+					school,
+					studentID,
+					created_at,
+					updated_at
+				});
 
-			return res.status(200).json({ message: 'Đăng ký thành công' });
+				return res.status(200).json({ message: 'Đăng ký thành công' });
+			}
 		} else if (req.method === 'GET') {
 			const listUsers = await Participant.find();
 			return res.status(200).json(listUsers);
