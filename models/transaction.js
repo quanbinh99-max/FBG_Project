@@ -1,5 +1,10 @@
 const mongoose = require('mongoose');
 
+const StatusEnum = {
+	PENDING: 'Chưa thanh toán',
+	SUCCESS: 'Đã thanh toán'
+};
+
 const TransactionSchema = new mongoose.Schema({
 	participant_id: {
 		type: mongoose.Schema.Types.ObjectId,
@@ -12,8 +17,8 @@ const TransactionSchema = new mongoose.Schema({
 	},
 	paymentStatus: {
 		type: String,
-		enum: ['Chưa thanh toán', 'Đã thanh toán'],
-		default: 'Chưa thanh toán'
+		enum: [StatusEnum.PENDING, StatusEnum.SUCCESS],
+		default: StatusEnum.PENDING
 	},
 	created_at: { type: Date, required: true },
 	updated_at: { type: Date, required: true }
@@ -25,4 +30,4 @@ const Transaction = mongoose.model(
 	'transactions'
 );
 
-module.exports = { TransactionSchema, Transaction };
+module.exports = { TransactionSchema, Transaction, StatusEnum };

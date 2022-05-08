@@ -1,0 +1,53 @@
+const { Participant } = require('.././models/participant');
+const { Transaction } = require('.././models/transaction');
+const { TicketDetail } = require('.././models/ticket-detail');
+const StatusEnum = require('.././models/transaction').StatusEnum;
+
+module.exports.getPendingTransactions = async () => {
+	const pendingTransactions = await Transaction.find({
+		paymentStatus: StatusEnum.PENDING
+	});
+	return pendingTransactions;
+};
+
+module.exports.getTransactionByParticipant = async (participant_id) => {
+	const transaction = await Transaction.findOne({
+		participant_id: participant_id
+	});
+	return transaction;
+};
+
+module.exports.createTransaction = async (participant_id, ticket_id) => {
+	var transaction, participant, ticketDetail;
+	await Promise.all(
+		(transaction = Transaction.findOne({
+			participant_id: participant_id
+		})),
+		(participant = Participant.findOne({
+			id: participant_id
+		})),
+		(ticketDetail = TicketDetail.findOne({
+			id: ticket_id
+		}))
+	);
+	if (transaction != null) {
+		return { result: false, message: 'Mỗi người chỉ được mua một vé!' };
+	}
+	if (participant == null) {
+		return { result: false, message: 'Phải đăng ký trước khi mua vé!' };
+	}
+	if (ticketDetail == null) {
+		return { result: false, message: 'Vé không hợp lệ!' };
+	}
+	const status = StatusEnum.PENDING;
+	const updated_at = moment().format('YYYY-MM-DD HH:mm:ss');
+	const created_at = moment().format('YYYY-MM-DD HH:mm:ss');
+	await Transaction.create({
+		participant_id,
+		ticket_id,
+		status,
+		created_at,
+		updated_at
+	});
+	return { result: true, message: 'Đăng ký mua vé thành công' };
+};

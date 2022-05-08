@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
-const { Ticket, TicketSchema } = require('./ticket');
 
 const TicketDetailSchema = new mongoose.Schema({
 	type: {
 		type: mongoose.Schema.Types.ObjectId,
-		ref: 'tickets'
+		ref: 'tickets',
+		unique: [true, 'Loại vé này đã tồn tại'],
+		require: true
 	},
 	description: {
 		type: String,
