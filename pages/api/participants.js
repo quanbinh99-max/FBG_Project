@@ -46,11 +46,15 @@ const handler = async (req, res) => {
 			const listUsers = await Participant.find();
 			return res.status(200).json(listUsers);
 		} else if (req.method == 'PUT') {
-			const participant_id = req.body.participant_id;
-			const vcsc = req.body.vcsc;
-			await Participant.findByIdAndUpdate(participant_id, {
-				vcsc: vcsc
+			const { participant_id, vcsc } = req.body;
+			const participant = await Participant.findByIdAndUpdate(participant_id, {
+				$set: {
+					vcsc: vcsc
+				}
 			});
+			if (participant == null) {
+				return res.status(400).json({ message: 'Tạo tài khoản VCSC thất bại' });
+			}
 			return res.status(200).json({ message: 'Tạo tài khoản VCSC thành công' });
 		}
 	} catch (e) {
