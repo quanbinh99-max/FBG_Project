@@ -18,14 +18,12 @@ const handler = async (req, res) => {
 			});
 
 			if (participant == null) {
-				const vcsc = '';
 				participant = await Participant.create({
 					email,
 					name,
 					phoneNumber,
 					school,
 					studentID,
-					vcsc,
 					created_at,
 					updated_at
 				});
@@ -49,7 +47,8 @@ const handler = async (req, res) => {
 			const { participant_id, vcsc } = req.body;
 			const participant = await Participant.findByIdAndUpdate(participant_id, {
 				$set: {
-					vcsc: vcsc
+					vcsc: vcsc,
+					updated_at: updated_at
 				}
 			});
 			if (participant == null) {

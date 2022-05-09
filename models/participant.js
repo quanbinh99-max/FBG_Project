@@ -17,7 +17,6 @@ const ParticipantSchema = new mongoose.Schema({
 	studentID: { type: String, required: true },
 	vcsc: {
 		type: String,
-		required: true,
 		default: ''
 	},
 	created_at: { type: Date, required: true },
