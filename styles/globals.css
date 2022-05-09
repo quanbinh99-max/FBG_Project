@@ -63,7 +63,7 @@
 
 /* CAROUSEL */
 .carousel {
-  background-image: url("../styles/Images/background-header.png");
+  background-image: url("https://i.imgur.com/N2VNsrZ.jpg");
   background-size: cover;
   height: 100vh;
   background-position: center center;
@@ -117,7 +117,7 @@
 }
 
 .content {
-  background-image: url("../styles/Images/backgound-body.png");
+  background-image: url("https://i.imgur.com/YicUAaM.jpg");
   background-size: cover;
 }
 
