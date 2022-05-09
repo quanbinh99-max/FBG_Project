@@ -15,6 +15,11 @@ const ParticipantSchema = new mongoose.Schema({
 	},
 	school: { type: String, required: true },
 	studentID: { type: String, required: true },
+	vcsc: {
+		type: String,
+		required: true,
+		default: ''
+	},
 	created_at: { type: Date, required: true },
 	updated_at: { type: Date, required: true }
 });

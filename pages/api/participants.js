@@ -18,12 +18,14 @@ const handler = async (req, res) => {
 			});
 
 			if (participant == null) {
+				const vcsc = '';
 				participant = await Participant.create({
 					email,
 					name,
 					phoneNumber,
 					school,
 					studentID,
+					vcsc,
 					created_at,
 					updated_at
 				});
@@ -43,6 +45,13 @@ const handler = async (req, res) => {
 		} else if (req.method == 'GET') {
 			const listUsers = await Participant.find();
 			return res.status(200).json(listUsers);
+		} else if (req.method == 'PUT') {
+			const participant_id = req.body.participant_id;
+			const vcsc = req.body.vcsc;
+			await Participant.findByIdAndUpdate(participant_id, {
+				vcsc: vcsc
+			});
+			return res.status(200).json({ message: 'Tạo tài khoản VCSC thành công' });
 		}
 	} catch (e) {
 		console.log(e.message);

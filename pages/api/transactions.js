@@ -1,4 +1,6 @@
 const { Transaction } = require('../../models/transaction');
+const { Ticket } = require('../../models/ticket');
+const { TicketDetail } = require('../../models/ticket-detail');
 const db = require('../../util/database');
 const StatusEnum = require('../../models/transaction').StatusEnum;
 const transactionController = require('../../controller/transaction');
@@ -12,13 +14,17 @@ const handler = async (req, res) => {
 				await transactionController.getPendingTransactions();
 			return res.status(200).json(pendingTransactions);
 		} else if (req.method == 'PUT') {
-			const { participant_id } = req.body;
-			await Transaction.updateOne(
-				{ participant_id: participant_id },
-				{
-					paymentStatus: StatusEnum.SUCCESS
+			const { transaction_id, ticket_id } = req.body;
+			const ticketDetail = await TicketDetail.findById(ticket_id, 'type');
+			const ticket_type = ticketDetail.type;
+			await Ticket.findByIdAndUpdate(ticket_type, {
+				$inc: {
+					quantity: -1
 				}
-			);
+			});
+			await Transaction.findByIdAndUpdate(transaction_id, {
+				paymentStatus: StatusEnum.SUCCESS
+			});
 			return res.status(200).json({ message: 'Thanh toán thành công' });
 		} else if (req.method == 'POST') {
 			const { participant_id, ticket_id } = req.body;
