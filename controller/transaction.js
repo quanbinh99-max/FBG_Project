@@ -2,6 +2,7 @@ const { Participant } = require('.././models/participant');
 const { Transaction } = require('.././models/transaction');
 const { TicketDetail } = require('.././models/ticket-detail');
 const { Ticket } = require('.././models/ticket');
+const ticketDetailController = require('.././controller/ticket-detail');
 
 const StatusEnum = require('.././models/transaction').StatusEnum;
 const moment = require('moment');
@@ -55,15 +56,11 @@ module.exports.createTransaction = async (participant_id, ticket_id) => {
 
 module.exports.completePayment = async (transaction_id, ticket_id) => {
 	const updated_at = moment().format('YYYY-MM-DD HH:mm:ss');
-	const ticketDetail = await TicketDetail.findById(ticket_id, 'type');
-	const ticket_type = ticketDetail.type;
-	const ticket = await Ticket.findByIdAndUpdate(ticket_type, {
-		$inc: {
-			quantity: -1
-		}
-	});
-	if (ticket == null) {
-		return { result: false, message: 'Không thể mua loại vé này' };
+	const { result, type, message } = await ticketDetailController.checkTicket(
+		ticket_id
+	);
+	if (!result) {
+		return { result: false, message: message };
 	}
 	const transaction = await Transaction.findByIdAndUpdate(transaction_id, {
 		paymentStatus: StatusEnum.SUCCESS,
@@ -72,5 +69,10 @@ module.exports.completePayment = async (transaction_id, ticket_id) => {
 	if (transaction == null) {
 		return { result: false, message: 'Giao dịch không tồn tại' };
 	}
+	const ticket = await Ticket.findByIdAndUpdate(type, {
+		$inc: {
+			quantity: -1
+		}
+	});
 	return { result: true, message: 'Giao dịch thành công' };
 };
