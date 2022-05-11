@@ -1,7 +1,48 @@
-import React from 'react';
-import axios from 'axios';
+import React, { useRef, useState } from 'react';
+import apiClient from '.././util/http-common';
+
+const ticket1 = '6276c172419e149a048aba17';
+const ticket2 = '6276c183419e149a048aba19';
+const ticket3 = '6276c18f419e149a048aba1b';
 
 function Conten(props) {
+	const post_email = useRef(null);
+	const post_name = useRef(null);
+	const post_phoneNumber = useRef(null);
+	const post_school = useRef(null);
+	const post_studentID = useRef(null);
+	const post_ticket_id = useRef(null);
+	const [postResult, setPostResult] = useState(null);
+	const formatResponse = (res) => {
+		return JSON.stringify(res, null, 6);
+	};
+	async function postData() {
+		const postData = {
+			email: post_email.current.value,
+			name: post_name.current.value,
+			phoneNumber: post_phoneNumber.current.value,
+			school: post_school.current.value,
+			studentID: post_studentID.current.value,
+			ticket_id: post_ticket_id.current.value
+		};
+		try {
+			const res = await apiClient.post('/participants', postData, {
+				headers: {
+					'x-access-token': 'token-value'
+				}
+			});
+			const result = {
+				status: res.status + '-' + res.statusText,
+				headers: res.headers,
+				data: res.data
+			};
+		} catch (err) {
+			setPostResult(formatResponse(err.response?.data || err));
+		} finally {
+			console.log(postResult);
+		}
+	}
+
 	return (
 		<div className="content">
 			<section id="livestream" className="container">
@@ -35,39 +76,64 @@ function Conten(props) {
 			</section>
 			<section id="buyTicket" className="container">
 				<h3>Đặt mua vé</h3>
-				<form>
+				<form method="POST">
 					<div className="row">
 						<div className="col-xs-12 col-lg-6 text-center">
 							<div className="buyTicket__left ">
 								<div className="form-group">
-									<input type="text" name="name" placeholder="Họ tên" />
+									<input
+										type="text"
+										name="name"
+										ref={post_name}
+										placeholder="Họ tên"
+									/>
 								</div>
 								<div className="form-group">
-									<input type="text" name="email" placeholder="Email" />
+									<input
+										type="text"
+										name="email"
+										ref={post_email}
+										placeholder="Email"
+									/>
 								</div>
 								<div className="form-group">
 									<input
 										type="number"
 										name="phoneCall"
+										ref={post_phoneNumber}
 										placeholder="Số điện thoại"
 									/>
 								</div>
 								<div className="form-group">
-									<input type="text" name="school" placeholder="Trường" />
+									<input
+										type="text"
+										name="school"
+										ref={post_school}
+										placeholder="Trường"
+									/>
 								</div>
 								<div className="form-group">
-									<input type="text" name="id" placeholder="MSSV" />
+									<input
+										type="text"
+										name="studentID"
+										ref={post_studentID}
+										placeholder="MSSV"
+									/>
 								</div>
 							</div>
 						</div>
 						<div className="col-xs-12 col-lg-6 buyTicket__right">
-							<select className=" buyTicket__select">
+							<select
+								className=" buyTicket__select"
+								name="ticket_id"
+								ref={post_ticket_id}
+							>
 								<option value disabled selected hidden>
 									LOẠI VÉ
 								</option>
-								<option value={1}>One</option>
-								<option value={2}>Two</option>
-								<option value={3}>Three</option>
+								<option value={ticket1}>One</option>
+								<option value={ticket2}>Two</option>
+								<option value={ticket3}>Three</option>
 							</select>
 							<div className="ticketInfor">
 								<h4>Hạng vé</h4>
@@ -75,7 +141,11 @@ function Conten(props) {
 								<p>Quyền lợi 1</p>
 								<p>Quyền lợi 2</p>
 								<p>Quyền lợi 3</p>
-								<button type="submit" className="btn btn-primary btnSignup">
+								<button
+									type="submit"
+									className="btn btn-primary btnSignup"
+									onClick={postData}
+								>
 									Đăng ký
 								</button>
 							</div>
