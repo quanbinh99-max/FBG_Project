@@ -76,7 +76,7 @@ function Conten(props) {
 			</section>
 			<section id="buyTicket" className="container">
 				<h3>Đặt mua vé</h3>
-				<div>
+				<form method="POST">
 					<div className="row">
 						<div className="col-xs-12 col-lg-6 text-center">
 							<div className="buyTicket__left ">
@@ -152,7 +152,7 @@ function Conten(props) {
 						</div>
 						<hr className="line" />
 					</div>
-				</div>
+				</form>
 			</section>
 			<section id="info" className="container">
 				<div className="row">
