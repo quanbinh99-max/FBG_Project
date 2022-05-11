@@ -26,12 +26,16 @@ function Conten(props) {
 			ticket_id: post_ticket_id.current.value
 		};
 		try {
-			const res = await apiClient.post('/api/participants', postData, {
-				headers: {
-					'x-access-token': 'token-value',
-					path: '/api/participants'
+			const res = await apiClient.post(
+				'https://fbg-project.vercel.app/api/participants',
+				postData,
+				{
+					headers: {
+						'x-access-token': 'token-value',
+						path: '/api/participants'
+					}
 				}
-			});
+			);
 			const result = {
 				status: res.status + '-' + res.statusText,
 				headers: res.headers,
