@@ -28,8 +28,7 @@ function Conten(props) {
 		try {
 			const res = await apiClient.post('/participants', postData, {
 				headers: {
-					'x-access-token': 'token-value',
-					path: '/api/participants'
+					'x-access-token': 'token-value'
 				}
 			});
 			const result = {
