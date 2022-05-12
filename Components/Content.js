@@ -204,11 +204,11 @@ function Conten() {
 					<div className="col-md-4">
 						<p>SOI</p>
 					</div>
-					<div className="col-md-6">
+					<div className="col-md-4 center">
 						<span>Sẵn sàng để khám phá? </span>
 						<button className="btn btn-primary btn__active">Mua vé ngay</button>
 					</div>
-					<div className="col-md-2 footerIcon lastComponent">
+					<div className="col-md-4 footerIcon lastComponent">
 						<i className="fab fa-instagram" />
 						<i className="fab fa-linkedin-in" />
 						<i className="fab fa-facebook-f" />
@@ -221,7 +221,7 @@ function Conten() {
 						<i className="icomoon icon-phone" />
 						<span> 0123.458.456 (A.Phi)</span>
 					</div>
-					<div className="col-md-4 col-xs-12">
+					<div className="col-md-4 col-xs-12 center">
 						<span>Mong muốn cộng tác? </span>
 						<i className="icomoon icon-phone" />
 						<span> 0456.456.5456 (C.Hoa)</span>

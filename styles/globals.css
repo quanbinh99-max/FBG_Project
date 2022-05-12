@@ -315,6 +315,10 @@ footer {
 	color: gray;
 }
 
+.center {
+	text-align: center;
+}
+
 @media only screen and (min-width: 768px) {
 	.carousel__contact {
 		display: block;
