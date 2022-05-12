@@ -20,10 +20,10 @@ function Conten() {
 			{
 				content: content,
 				style: {
-					marginTop: '2vh'
+					marginTop: '5vh'
 				}
 			},
-			2000
+			5000
 		);
 	};
 
@@ -32,15 +32,11 @@ function Conten() {
 			{
 				content: content,
 				style: {
-					marginTop: '2vh'
+					marginTop: '5vh'
 				}
 			},
-			2000
+			5000
 		);
-	};
-
-	const loading = (content) => {
-		message.loading(content, 7000);
 	};
 
 	const formatResponse = (res) => {
@@ -58,7 +54,6 @@ function Conten() {
 			ticket_id: post_ticket_id.current.value
 		};
 		try {
-			loading('Đang đăng ký...');
 			const res = await apiClient.post('/participants', postData, {
 				headers: {
 					'x-access-token': 'token-value'
@@ -68,7 +63,7 @@ function Conten() {
 			console.log(postResult);
 			success(postResult);
 		} catch (err) {
-			setPostResult(err);
+			setPostResult(err.response?.data || err);
 			error(postResult);
 		} finally {
 			console.log('Post message: ', postResult);
