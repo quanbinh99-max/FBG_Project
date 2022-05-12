@@ -34,11 +34,11 @@ function Conten() {
 					'x-access-token': 'token-value'
 				}
 			});
-			console.log('Success:\n', res);
-			setPostResult(res.data.message);
+			setPostResult(res.data);
+			console.log('Success:\n', postResult);
 			message.success(postResult);
 		} catch (err) {
-			setPostResult(err.response?.data.message || err);
+			setPostResult(err.response?.data || err);
 			message.error(postResult);
 		} finally {
 			console.log('Post message: ', postResult);
