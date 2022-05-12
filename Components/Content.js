@@ -13,7 +13,7 @@ function Conten() {
 	const post_school = useRef(null);
 	const post_studentID = useRef(null);
 	const post_ticket_id = useRef(null);
-	const [postResult, setPostResult] = useState(null);
+	var postResult;
 
 	const success = async (content) => {
 		await message.success({
@@ -49,7 +49,7 @@ function Conten() {
 					'x-access-token': 'token-value'
 				}
 			});
-			setPostResult('Đăng ký mua vé thành công!');
+			postResult = 'Đăng ký mua vé thành công!';
 			console.log(postResult);
 			success(postResult);
 		} catch (err) {
@@ -57,7 +57,7 @@ function Conten() {
 			error(postResult);
 		} finally {
 			console.log('Post message: ', postResult);
-			setPostResult('');
+			postResult = '';
 		}
 	};
 
