@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import apiClient from '.././util/http-common';
+import { message } from 'antd';
 
 const ticket1 = '6276c172419e149a048aba17';
 const ticket2 = '6276c183419e149a048aba19';
@@ -13,9 +14,6 @@ function Conten(props) {
 	const post_studentID = useRef(null);
 	const post_ticket_id = useRef(null);
 	const [postResult, setPostResult] = useState(null);
-	const formatResponse = (res) => {
-		return JSON.stringify(res, null, 6);
-	};
 	async function postData() {
 		const postData = {
 			email: post_email.current.value,
@@ -31,11 +29,7 @@ function Conten(props) {
 					'x-access-token': 'token-value'
 				}
 			});
-			const result = {
-				status: res.status + '-' + res.statusText,
-				headers: res.headers,
-				data: res.data
-			};
+			setPostResult(res.data);
 		} catch (err) {
 			setPostResult(formatResponse(err.response?.data || err));
 		} finally {
