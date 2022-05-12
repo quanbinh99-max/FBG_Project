@@ -16,27 +16,21 @@ function Conten() {
 	const [postResult, setPostResult] = useState(null);
 
 	const success = (content) => {
-		message.success(
-			{
-				content: content,
-				style: {
-					marginTop: '5vh'
-				}
-			},
-			5000
-		);
+		message.success({
+			content: content,
+			style: {
+				marginTop: '5vh'
+			}
+		});
 	};
 
 	const error = (content) => {
-		message.error(
-			{
-				content: content,
-				style: {
-					marginTop: '5vh'
-				}
-			},
-			5000
-		);
+		message.error({
+			content: content,
+			style: {
+				marginTop: '5vh'
+			}
+		});
 	};
 
 	const formatResponse = (res) => {
