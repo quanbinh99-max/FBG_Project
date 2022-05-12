@@ -13,7 +13,7 @@ function Conten() {
 	const post_school = useRef(null);
 	const post_studentID = useRef(null);
 	const post_ticket_id = useRef(null);
-	const [postResult] = useState(null);
+	const [postResult, setPostResult] = useState(null);
 
 	const success = (content) => {
 		message.success(
@@ -59,11 +59,11 @@ function Conten() {
 					'x-access-token': 'token-value'
 				}
 			});
-			postResult = 'Đăng ký mua vé thành công!';
+			setPostResult(formatResponse(res.data));
 			console.log(postResult);
 			success(postResult);
 		} catch (err) {
-			postResult = err.response?.data || err;
+			postResult = formatResponse(err.response?.data || err);
 			error(postResult);
 		} finally {
 			console.log('Post message: ', postResult);
