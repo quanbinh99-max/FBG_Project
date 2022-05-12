@@ -33,10 +33,6 @@ function Conten() {
 		});
 	};
 
-	const formatResponse = (res) => {
-		return JSON.stringify(res, null, 2);
-	};
-
 	const postData = async (e) => {
 		e.preventDefault();
 		const postData = {
@@ -53,11 +49,11 @@ function Conten() {
 					'x-access-token': 'token-value'
 				}
 			});
-			setPostResult(formatResponse(res));
+			setPostResult(res.data.message);
 			console.log(postResult);
 			success(postResult);
 		} catch (err) {
-			postResult = err.response?.data.message || err;
+			postResult = err.response.data.message;
 			error(postResult);
 		} finally {
 			console.log('Post message: ', postResult);
