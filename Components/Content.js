@@ -28,7 +28,7 @@ function Conten() {
 				newLoadings[index] = false;
 				return newLoadings;
 			});
-		}, 6000);
+		}, 12000);
 	};
 
 	const success = async (content) => {
