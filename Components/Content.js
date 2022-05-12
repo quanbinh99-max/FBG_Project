@@ -59,11 +59,11 @@ function Conten() {
 					'x-access-token': 'token-value'
 				}
 			});
-			setPostResult(formatResponse(res.data));
+			setPostResult(formatResponse(res.data.message));
 			console.log(postResult);
 			success(postResult);
 		} catch (err) {
-			postResult = formatResponse(err.response?.data || err);
+			postResult = formatResponse(err.response?.data.message || err);
 			error(postResult);
 		} finally {
 			console.log('Post message: ', postResult);
