@@ -13,7 +13,23 @@ function Conten() {
 	const post_school = useRef(null);
 	const post_studentID = useRef(null);
 	const post_ticket_id = useRef(null);
+	const [loadings, setLoadings] = useState([]);
 	var postResult;
+
+	const enterLoading = (index) => {
+		setLoadings((prevLoadings) => {
+			const newLoadings = [...prevLoadings];
+			newLoadings[index] = true;
+			return newLoadings;
+		});
+		setTimeout(() => {
+			setLoadings((prevLoadings) => {
+				const newLoadings = [...prevLoadings];
+				newLoadings[index] = false;
+				return newLoadings;
+			});
+		}, 6000);
+	};
 
 	const success = async (content) => {
 		await message.success({
@@ -34,6 +50,7 @@ function Conten() {
 	};
 
 	const postData = async (e) => {
+		enterLoading(0);
 		e.preventDefault();
 		const postData = {
 			email: post_email.current.value,
@@ -163,6 +180,7 @@ function Conten() {
 									type="submit"
 									className="btn btn-primary btnSignup"
 									onClick={postData}
+									loading={loadings[0]}
 								>
 									Đăng ký
 								</button>
