@@ -49,7 +49,7 @@ function Conten() {
 					'x-access-token': 'token-value'
 				}
 			});
-			setPostResult(res.data.message);
+			setPostResult('Đăng ký mua vé thành công!');
 			console.log(postResult);
 			success(postResult);
 		} catch (err) {
