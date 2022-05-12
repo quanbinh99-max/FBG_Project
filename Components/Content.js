@@ -63,7 +63,7 @@ function Conten() {
 			console.log(postResult);
 			success(postResult);
 		} catch (err) {
-			postResult = formatResponse(err.response?.data.message || err);
+			postResult = err.response?.data.message || err;
 			error(postResult);
 		} finally {
 			console.log('Post message: ', postResult);
