@@ -42,6 +42,7 @@ function Conten() {
 			message.error(postResult);
 		} finally {
 			console.log('Post message: ', postResult);
+			setPostResult(null);
 		}
 	};
 
