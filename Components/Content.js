@@ -59,7 +59,7 @@ function Conten() {
 					'x-access-token': 'token-value'
 				}
 			});
-			setPostResult(formatResponse(res.data.message));
+			setPostResult(res.data.message);
 			console.log(postResult);
 			success(postResult);
 		} catch (err) {
@@ -67,7 +67,7 @@ function Conten() {
 			error(postResult);
 		} finally {
 			console.log('Post message: ', postResult);
-			setPostResult(null);
+			setPostResult('');
 		}
 	};
 
