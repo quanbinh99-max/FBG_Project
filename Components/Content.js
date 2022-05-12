@@ -22,13 +22,14 @@ function Conten() {
 			newLoadings[index] = true;
 			return newLoadings;
 		});
-		setTimeout(() => {
-			setLoadings((prevLoadings) => {
-				const newLoadings = [...prevLoadings];
-				newLoadings[index] = false;
-				return newLoadings;
-			});
-		}, 12000);
+	};
+
+	const endLoading = (index) => {
+		setLoadings((prevLoadings) => {
+			const newLoadings = [...prevLoadings];
+			newLoadings[index] = false;
+			return newLoadings;
+		});
 	};
 
 	const success = async (content) => {
@@ -66,10 +67,12 @@ function Conten() {
 					'x-access-token': 'token-value'
 				}
 			});
+			endLoading(0);
 			postResult = 'Đăng ký mua vé thành công!';
 			console.log(postResult);
 			success(postResult);
 		} catch (err) {
+			endLoading(0);
 			postResult = err.response.data.message;
 			error(postResult);
 		} finally {
@@ -179,8 +182,8 @@ function Conten() {
 								<button
 									type="submit"
 									className="btn btn-primary btnSignup"
-									onClick={postData}
 									loading={loadings[0]}
+									onClick={postData}
 								>
 									Đăng ký
 								</button>
