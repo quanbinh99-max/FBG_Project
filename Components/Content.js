@@ -180,8 +180,8 @@ function Conten() {
 								<p>Quyền lợi 2</p>
 								<p>Quyền lợi 3</p>
 								<Button
-									type="submit"
-									className="btn btn-primary btnSignup"
+									type="primary"
+									size="large"
 									loading={loadings[0]}
 									onClick={postData}
 								>
