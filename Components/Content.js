@@ -15,8 +15,8 @@ function Conten() {
 	const post_ticket_id = useRef(null);
 	const [postResult, setPostResult] = useState(null);
 
-	const success = (content) => {
-		message.success({
+	const success = async (content) => {
+		await message.success({
 			content: content,
 			style: {
 				marginTop: '5vh'
@@ -24,8 +24,8 @@ function Conten() {
 		});
 	};
 
-	const error = (content) => {
-		message.error({
+	const error = async (content) => {
+		await message.error({
 			content: content,
 			style: {
 				marginTop: '5vh'
