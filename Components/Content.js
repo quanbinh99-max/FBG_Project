@@ -35,10 +35,10 @@ function Conten() {
 				}
 			});
 			console.log('Success:\n', res);
-			setPostResult(formatResponse(res.data.message));
+			setPostResult(res.data.message);
 			message.success(postResult);
 		} catch (err) {
-			setPostResult(formatResponse(err.response?.data.message || err));
+			setPostResult(err.response?.data.message || err);
 			message.error(postResult);
 		} finally {
 			console.log('Post message: ', postResult);
