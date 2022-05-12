@@ -1,6 +1,6 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import apiClient from '.././util/http-common';
-import { message } from 'antd';
+import { Button, message } from 'antd';
 
 const ticket1 = '6276c172419e149a048aba17';
 const ticket2 = '6276c183419e149a048aba19';
@@ -179,14 +179,14 @@ function Conten() {
 								<p>Quyền lợi 1</p>
 								<p>Quyền lợi 2</p>
 								<p>Quyền lợi 3</p>
-								<button
+								<Button
 									type="submit"
 									className="btn btn-primary btnSignup"
 									loading={loadings[0]}
 									onClick={postData}
 								>
 									Đăng ký
-								</button>
+								</Button>
 							</div>
 						</div>
 						<hr className="line" />
