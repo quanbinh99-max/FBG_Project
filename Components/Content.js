@@ -34,7 +34,7 @@ function Conten() {
 					'x-access-token': 'token-value'
 				}
 			});
-			setPostResult(res.data);
+			setPostResult(formatResponse(res.data));
 			console.log('Success:\n', postResult);
 			message.success(postResult);
 		} catch (err) {
