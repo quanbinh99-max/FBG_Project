@@ -14,6 +14,33 @@ function Conten() {
 	const post_studentID = useRef(null);
 	const post_ticket_id = useRef(null);
 	const [postResult, setPostResult] = useState(null);
+
+	const success = (content) => {
+		message.success(
+			{
+				content: content,
+				className: 'custom-class',
+				style: {
+					marginTop: '2vh'
+				}
+			},
+			2000
+		);
+	};
+
+	const error = (content) => {
+		message.error(
+			{
+				content: content,
+				className: 'custom-class',
+				style: {
+					marginTop: '2vh'
+				}
+			},
+			2000
+		);
+	};
+
 	const formatResponse = (res) => {
 		return JSON.stringify(res, null, 2);
 	};
@@ -34,12 +61,12 @@ function Conten() {
 					'x-access-token': 'token-value'
 				}
 			});
-			setPostResult(formatResponse(res.data));
+			setPostResult(formatResponse(res));
 			console.log('Success:\n', postResult);
-			message.success(postResult);
+			success(postResult);
 		} catch (err) {
-			setPostResult(err.response?.data || err);
-			message.error(postResult);
+			setPostResult(err.response);
+			error(postResult);
 		} finally {
 			console.log('Post message: ', postResult);
 			setPostResult(null);
