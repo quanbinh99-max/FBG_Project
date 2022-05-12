@@ -61,11 +61,11 @@ function Conten() {
 					'x-access-token': 'token-value'
 				}
 			});
-			setPostResult(res.data.message);
-			console.log('Success:\n', postResult);
+			setPostResult('Đăng ký mua vé thành công');
+			console.log(postResult);
 			success(postResult);
 		} catch (err) {
-			setPostResult(err.response);
+			setPostResult(err.response.data.message);
 			error(postResult);
 		} finally {
 			console.log('Post message: ', postResult);
