@@ -15,7 +15,7 @@ function Conten() {
 	const post_ticket_id = useRef(null);
 	const [postResult, setPostResult] = useState(null);
 	const formatResponse = (res) => {
-		return JSON.stringify(res, null, 6);
+		return JSON.stringify(res, null, 2);
 	};
 
 	const postData = async (e) => {
@@ -34,14 +34,14 @@ function Conten() {
 					'x-access-token': 'token-value'
 				}
 			});
-			console.log(res);
+			console.log('Success:\n', res);
 			setPostResult(formatResponse(res.data.message));
 			message.success(postResult);
 		} catch (err) {
 			setPostResult(formatResponse(err.response?.data.message || err));
 			message.error(postResult);
 		} finally {
-			console.log(postResult);
+			console.log('Post message: ', postResult);
 		}
 	};
 
