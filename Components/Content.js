@@ -6,7 +6,7 @@ const ticket1 = '6276c172419e149a048aba17';
 const ticket2 = '6276c183419e149a048aba19';
 const ticket3 = '6276c18f419e149a048aba1b';
 
-function Conten(props) {
+function Conten() {
 	const post_email = useRef(null);
 	const post_name = useRef(null);
 	const post_phoneNumber = useRef(null);
@@ -14,7 +14,12 @@ function Conten(props) {
 	const post_studentID = useRef(null);
 	const post_ticket_id = useRef(null);
 	const [postResult, setPostResult] = useState(null);
-	async function postData() {
+	const formatResponse = (res) => {
+		return JSON.stringify(res, null, 6);
+	};
+
+	const postData = async (e) => {
+		e.preventDefault();
 		const postData = {
 			email: post_email.current.value,
 			name: post_name.current.value,
@@ -29,13 +34,16 @@ function Conten(props) {
 					'x-access-token': 'token-value'
 				}
 			});
-			setPostResult(res.data);
+			console.log(res);
+			setPostResult(formatResponse(res.data.message));
+			message.success(postResult);
 		} catch (err) {
-			setPostResult(formatResponse(err.response?.data || err));
+			setPostResult(formatResponse(err.response?.data.message || err));
+			message.error(postResult);
 		} finally {
 			console.log(postResult);
 		}
-	}
+	};
 
 	return (
 		<div className="content">
