@@ -79,11 +79,11 @@ function Conten() {
 			success(postResult);
 		} catch (err) {
 			endLoading(0);
-			setPostResult(err.response.data.message);
+			setPostResult(err.response?.data.message || err);
 			error(postResult);
 		} finally {
 			console.log('Post message: ', postResult);
-			postResult = '';
+			setPostResult(null);
 		}
 	};
 
