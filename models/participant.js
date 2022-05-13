@@ -1,8 +1,12 @@
 const mongoose = require('mongoose');
+require('mongoose-type-email');
+mongoose.SchemaTypes.Email.defaults.message = 'Email không hợp lệ';
 
 const ParticipantSchema = new mongoose.Schema({
 	email: {
-		type: String,
+		type: mongoose.SchemaTypes.Email,
+		correctTld: true,
+		allowBlank: false,
 		required: [true, 'Không được để trống'],
 		trim: true,
 		unique: true
