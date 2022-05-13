@@ -122,6 +122,7 @@ function Conten() {
 									<input
 										type="text"
 										name="name"
+										required="true"
 										ref={post_name}
 										placeholder="Họ tên"
 									/>
@@ -130,6 +131,7 @@ function Conten() {
 									<input
 										type="text"
 										name="email"
+										required="true"
 										ref={post_email}
 										placeholder="Email"
 									/>
@@ -138,6 +140,7 @@ function Conten() {
 									<input
 										type="number"
 										name="phoneCall"
+										required="true"
 										ref={post_phoneNumber}
 										placeholder="Số điện thoại"
 									/>
@@ -146,6 +149,7 @@ function Conten() {
 									<input
 										type="text"
 										name="school"
+										required="true"
 										ref={post_school}
 										placeholder="Trường"
 									/>
@@ -154,6 +158,7 @@ function Conten() {
 									<input
 										type="text"
 										name="studentID"
+										required="true"
 										ref={post_studentID}
 										placeholder="MSSV"
 									/>
