@@ -13,7 +13,7 @@ const ParticipantSchema = new mongoose.Schema({
 	},
 	phoneNumber: {
 		type: String,
-		required: true,
+		required: [true, 'Không được để trống'],
 		maxlength: [10, 'Tối đa 10 số']
 	},
 	school: {
