@@ -13,7 +13,7 @@ function Conten() {
 	const post_school = useRef(null);
 	const post_studentID = useRef(null);
 	const post_ticket_id = useRef(null);
-	const [postResult, setPostResult] = useState(null);
+	var postResult;
 	const [loadings, setLoadings] = useState([]);
 
 	const enterLoading = (index) => {
@@ -74,16 +74,16 @@ function Conten() {
 				}
 			});
 			endLoading(0);
-			setPostResult('Đăng ký mua vé thành công!');
+			postResult = 'Đăng ký mua vé thành công!';
 			console.log(postResult);
 			success(postResult);
 		} catch (err) {
 			endLoading(0);
-			setPostResult(err.response?.data.message || err);
+			postResult = err.response?.data.message || err;
 			error(postResult);
 		} finally {
 			console.log('Post message: ', postResult);
-			setPostResult(null);
+			postResult = null;
 		}
 	};
 
