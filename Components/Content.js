@@ -33,21 +33,27 @@ function Conten() {
 	};
 
 	const success = async (content) => {
-		await message.success({
-			content: content,
-			style: {
-				marginTop: '5vh'
-			}
-		});
+		await message.success(
+			{
+				content: content,
+				style: {
+					marginTop: '5vh'
+				}
+			},
+			5000
+		);
 	};
 
 	const error = async (content) => {
-		await message.error({
-			content: content,
-			style: {
-				marginTop: '5vh'
-			}
-		});
+		await message.error(
+			{
+				content: content,
+				style: {
+					marginTop: '5vh'
+				}
+			},
+			10000
+		);
 	};
 
 	const postData = async (e) => {
@@ -122,7 +128,7 @@ function Conten() {
 									<input
 										type="text"
 										name="name"
-										required="true"
+										required
 										ref={post_name}
 										placeholder="Họ tên"
 									/>
@@ -131,7 +137,7 @@ function Conten() {
 									<input
 										type="text"
 										name="email"
-										required="true"
+										required
 										ref={post_email}
 										placeholder="Email"
 									/>
@@ -140,7 +146,7 @@ function Conten() {
 									<input
 										type="number"
 										name="phoneCall"
-										required="true"
+										required
 										ref={post_phoneNumber}
 										placeholder="Số điện thoại"
 									/>
@@ -149,7 +155,7 @@ function Conten() {
 									<input
 										type="text"
 										name="school"
-										required="true"
+										required
 										ref={post_school}
 										placeholder="Trường"
 									/>
@@ -158,7 +164,7 @@ function Conten() {
 									<input
 										type="text"
 										name="studentID"
-										required="true"
+										required
 										ref={post_studentID}
 										placeholder="MSSV"
 									/>

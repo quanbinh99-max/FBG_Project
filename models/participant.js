@@ -7,14 +7,23 @@ const ParticipantSchema = new mongoose.Schema({
 		trim: true,
 		unique: true
 	},
-	name: { type: String, required: true },
+	name: {
+		type: String,
+		required: [true, 'Không được để trống']
+	},
 	phoneNumber: {
 		type: String,
 		required: true,
 		maxlength: [10, 'Tối đa 10 số']
 	},
-	school: { type: String, required: true },
-	studentID: { type: String, required: true },
+	school: {
+		type: String,
+		required: [true, 'Không được để trống']
+	},
+	studentID: {
+		type: String,
+		required: [true, 'Không được để trống']
+	},
 	vcsc: {
 		type: String,
 		default: ''
