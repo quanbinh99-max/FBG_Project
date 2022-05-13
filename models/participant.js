@@ -1,32 +1,34 @@
 const mongoose = require('mongoose');
-require('mongoose-type-email');
-mongoose.SchemaTypes.Email.defaults.message = 'Email không hợp lệ';
 
 const ParticipantSchema = new mongoose.Schema({
 	email: {
-		type: mongoose.SchemaTypes.Email,
-		correctTld: true,
-		allowBlank: false,
-		required: [true, 'Không được để trống'],
+		type: String,
+		required: [true, 'Email không được để trống'],
 		trim: true,
-		unique: true
+		match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Email không hợp lệ'],
+		unique: [true, 'Email này đã tồn tại']
 	},
 	name: {
 		type: String,
-		required: [true, 'Không được để trống']
+		trim: true,
+		required: [true, 'Tên không được để trống']
 	},
 	phoneNumber: {
 		type: String,
-		required: [true, 'Không được để trống'],
-		maxlength: [10, 'Tối đa 10 số']
+		required: [true, 'Số điện thoại không được để trống'],
+		minlength: [10, 'Số điện thoại phải có 10 số'],
+		maxlength: [10, 'Số điện thoại phải có 10 số'],
+		unique: [true, 'Số điện thoại này đã tồn tại']
 	},
 	school: {
 		type: String,
-		required: [true, 'Không được để trống']
+		trim: true,
+		required: [true, 'Tên trường không được để trống']
 	},
 	studentID: {
 		type: String,
-		required: [true, 'Không được để trống']
+		trim: true,
+		required: [true, 'MSSV không được để trống']
 	},
 	vcsc: {
 		type: String,

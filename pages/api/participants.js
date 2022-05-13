@@ -17,7 +17,7 @@ const handler = async (req, res) => {
 
 			// Check ticket_id
 			if (!input.isObjectIdValid(ticket_id)) {
-				return res.status(400).json({ message: 'Ticket ID is invalid' });
+				return res.status(400).json({ message: 'Phải chọn loại vé' });
 			}
 			var checkTicket = await ticketDetailController.checkTicket(ticket_id);
 			var result = checkTicket.result;
