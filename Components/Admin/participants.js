@@ -1,14 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import apiClient from "../../util/http-common";
 import "antd/dist/antd.css";
 import { Table, Tag, Space } from "antd";
 
 function Participants(props) {
+  const [data, setData] = useState([]);
   useEffect(() => {
     const participants = async () => {
       try {
         const response = await apiClient.get("/participants");
-        console.log(response);
+        setData(response.data);
       } catch (error) {
         console.error(error);
       }
@@ -30,13 +31,13 @@ function Participants(props) {
     },
     {
       title: "Số điện thoại",
-      dataIndex: "phone",
-      key: "phone",
+      dataIndex: "phoneNumber",
+      key: "phoneNumber",
     },
     {
       title: "Trường",
       dataIndex: "school",
-      key: "phone",
+      key: "school",
     },
     {
       title: "MSSV",
@@ -48,31 +49,13 @@ function Participants(props) {
       dataIndex: "created_at",
       key: "created_at",
     },
+    {
+      title: "VCSC",
+      dataIndex: "vcsc",
+      key: "vcsc",
+    },
   ];
 
-  const data = [
-    {
-      key: "1",
-      name: "John Brown",
-      age: 32,
-      address: "New York No. 1 Lake Park",
-      tags: ["nice", "developer"],
-    },
-    {
-      key: "2",
-      name: "Jim Green",
-      age: 42,
-      address: "London No. 1 Lake Park",
-      tags: ["loser"],
-    },
-    {
-      key: "3",
-      name: "Joe Black",
-      age: 32,
-      address: "Sidney No. 1 Lake Park",
-      tags: ["cool", "teacher"],
-    },
-  ];
   return (
     <div>
       <Table columns={columns} dataSource={data} />
