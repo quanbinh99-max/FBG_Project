@@ -41,8 +41,8 @@ function Participants(props) {
     },
     {
       title: "MSSV",
-      dataIndex: "studentId",
-      key: "studentId",
+      dataIndex: "studentID",
+      key: "studentID",
     },
     {
       title: "Ngày đặt",

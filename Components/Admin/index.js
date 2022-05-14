@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import apiClient from "../../util/http-common";
 import { Layout, Menu } from "antd";
 import Participants from "./participants";
+import Transactions from "./transactions";
 import {
   AppstoreOutlined,
   BarChartOutlined,
@@ -13,13 +14,20 @@ import {
   VideoCameraOutlined,
 } from "@ant-design/icons";
 const { Header, Content, Footer, Sider } = Layout;
-const items = [UserOutlined, UserOutlined].map((icon, index) => ({
-  key: String(index + 1),
-  icon: React.createElement(icon),
-  label: `nav ${index + 1}`,
-}));
 
 function Index(props) {
+  const [tab, setTab] = useState(0);
+  const items = [UserOutlined, UserOutlined].map((icon, index) => ({
+    key: String(index + 1),
+    icon: React.createElement(icon),
+    label: `nav ${index + 1}`,
+    onClick: () => {
+      setTab(index);
+    },
+  }));
+
+  console.log(tab);
+
   return (
     <div>
       {" "}
@@ -67,7 +75,8 @@ function Index(props) {
                 textAlign: "center",
               }}
             >
-              <Participants></Participants>
+              {tab === 0 && <Participants></Participants>}
+              {tab === 1 && <Transactions></Transactions>}
             </div>
           </Content>
           <Footer
