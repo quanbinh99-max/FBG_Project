@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import apiClient from '../../util/http-common';
 import { Layout, Menu } from 'antd';
-import Conten from './Content';
+import Participants from './participants';
+import Transactions from './transactions';
 import {
 	AppstoreOutlined,
 	BarChartOutlined,
@@ -12,22 +14,20 @@ import {
 	VideoCameraOutlined
 } from '@ant-design/icons';
 const { Header, Content, Footer, Sider } = Layout;
-const items = [
-	UserOutlined,
-	VideoCameraOutlined,
-	UploadOutlined,
-	BarChartOutlined,
-	CloudOutlined,
-	AppstoreOutlined,
-	TeamOutlined,
-	ShopOutlined
-].map((icon, index) => ({
-	key: String(index + 1),
-	icon: React.createElement(icon),
-	label: `nav ${index + 1}`
-}));
 
-function index(props) {
+function Index(props) {
+	const [tab, setTab] = useState(0);
+	const items = [UserOutlined, UserOutlined].map((icon, index) => ({
+		key: String(index + 1),
+		icon: React.createElement(icon),
+		label: `nav ${index + 1}`,
+		onClick: () => {
+			setTab(index);
+		}
+	}));
+
+	console.log(tab);
+
 	return (
 		<div>
 			{' '}
@@ -75,7 +75,8 @@ function index(props) {
 								textAlign: 'center'
 							}}
 						>
-							<Conten></Conten>
+							{tab === 0 && <Participants></Participants>}
+							{tab === 1 && <Transactions></Transactions>}
 						</div>
 					</Content>
 					<Footer
@@ -91,4 +92,4 @@ function index(props) {
 	);
 }
 
-export default index;
+export default Index;
