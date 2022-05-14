@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import apiClient from '../../util/http-common';
 import { Layout, Menu } from 'antd';
 import Participants from './participants';
 import Transactions from './transactions';
