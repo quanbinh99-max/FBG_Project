@@ -2,11 +2,8 @@ import React, { useEffect, useState } from "react";
 import apiClient from "../../util/http-common";
 import "antd/dist/antd.css";
 import { Table } from "antd";
-const loai1 = "6276c172419e149a048aba17";
-const loai2 = "6276c183419e149a048aba19";
-const loai3 = "6276c18f419e149a048aba1b";
+
 function Transactions(props) {
-  const [data, setData] = useState([]);
   const [dataTransactions, setDataTransactions] = useState([]);
   const [dataParticipants, setDataParticipants] = useState([]);
 
@@ -35,13 +32,13 @@ function Transactions(props) {
     transactions();
   }, []);
 
-  const test = [];
+  const data = [];
 
   if (dataTransactions.length !== 0 && dataParticipants.length !== 0) {
     for (var i = 0; i < dataTransactions.length; i++) {
       for (var j = 0; j < dataParticipants.length; j++) {
         if (dataTransactions[i].participant_id === dataParticipants[j]._id) {
-          test.push({
+          data.push({
             ...dataParticipants[j],
             paymentStatus: dataTransactions[i].paymentStatus,
             ticket_id:
@@ -102,7 +99,7 @@ function Transactions(props) {
 
   return (
     <div>
-      <Table columns={columns} dataSource={test} />
+      <Table columns={columns} dataSource={data} />
     </div>
   );
 }

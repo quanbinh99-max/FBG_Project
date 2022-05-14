@@ -4,27 +4,42 @@ import { Layout, Menu } from "antd";
 import Participants from "./participants";
 import Transactions from "./transactions";
 import {
-  AppstoreOutlined,
-  BarChartOutlined,
-  CloudOutlined,
-  ShopOutlined,
+  DesktopOutlined,
+  PieChartOutlined,
+  FileOutlined,
   TeamOutlined,
   UserOutlined,
-  UploadOutlined,
-  VideoCameraOutlined,
 } from "@ant-design/icons";
 const { Header, Content, Footer, Sider } = Layout;
 
 function Index(props) {
-  const [tab, setTab] = useState(0);
-  const items = [UserOutlined, UserOutlined].map((icon, index) => ({
-    key: String(index + 1),
-    icon: React.createElement(icon),
-    label: `nav ${index + 1}`,
-    onClick: () => {
-      setTab(index);
-    },
-  }));
+  const [tab, setTab] = useState(1);
+
+  function getItem(label, key, icon, children) {
+    return {
+      key,
+      icon,
+      children,
+      label,
+      onClick: () => {
+        setTab(Number(key));
+      },
+    };
+  }
+
+  const items = [
+    getItem("Participants", "1", <PieChartOutlined />),
+    getItem("Transactions", "2", <DesktopOutlined />),
+  ];
+
+  // const items = [UserOutlined, UserOutlined].map((icon, index) => ({
+  //   key: String(index + 1),
+  //   icon: React.createElement(icon),
+  //   label: `nav ${index + 1}`,
+  //   onClick: () => {
+  //     setTab(index);
+  //   },
+  // }));
 
   console.log(tab);
 
@@ -75,8 +90,8 @@ function Index(props) {
                 textAlign: "center",
               }}
             >
-              {tab === 0 && <Participants></Participants>}
-              {tab === 1 && <Transactions></Transactions>}
+              {tab === 1 && <Participants></Participants>}
+              {tab === 2 && <Transactions></Transactions>}
             </div>
           </Content>
           <Footer
