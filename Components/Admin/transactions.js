@@ -86,9 +86,9 @@ function Transactions(props) {
 						transaction_id: dataTransactions[i]._id,
 						ticket_id: dataTransactions[i].ticket_id,
 						ticket_type:
-							dataTransactions[i].ticket_id === '6276c172419e149a048aba17'
+							dataTransactions[i].ticket_id === loai1
 								? 'Loại 1'
-								: dataTransactions[i].ticket_id === '6276c183419e149a048aba19'
+								: dataTransactions[i].ticket_id === loai2
 								? 'Loại 2'
 								: 'Loại 3'
 					});
