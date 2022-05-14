@@ -8,31 +8,9 @@ const StatusEnum = require('.././models/transaction').StatusEnum;
 const moment = require('moment');
 
 module.exports.getPendingTransactions = async () => {
-	const pendingTransactions = await Transaction.aggregate([
-		{
-			$match: {
-				$and: [{ paymentStatus: StatusEnum.PENDING }]
-			}
-		},
-		{
-			$lookup: {
-				from: 'participants',
-				localField: 'participant_id',
-				foreignField: '_id',
-				as: 'participant'
-			}
-		},
-		{
-			$unwind: '$participant'
-		},
-		{
-			$project: {
-				'participant.name': 1,
-				'participant.vcsc': 1,
-				ticket_id: 1
-			}
-		}
-	]);
+	const pendingTransactions = await Transaction.find({
+		paymentStatus: StatusEnum.PENDING
+	});
 	return pendingTransactions;
 };
 

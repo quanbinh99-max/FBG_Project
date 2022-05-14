@@ -9,7 +9,7 @@ const handler = async (req, res) => {
 		if (req.method === 'GET') {
 			const pendingTransactions =
 				await transactionController.getPendingTransactions();
-			return res.status(200).json({ result: pendingTransactions });
+			return res.status(200).json(pendingTransactions);
 		} else if (req.method == 'PUT') {
 			const { transaction_id, ticket_id } = req.body;
 			if (!input.isObjectIdValid(ticket_id)) {
