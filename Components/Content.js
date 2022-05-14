@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import apiClient from '.././util/http-common';
 import { Button, message } from 'antd';
 
@@ -13,7 +13,7 @@ function Conten() {
 	const post_school = useRef(null);
 	const post_studentID = useRef(null);
 	const post_ticket_id = useRef(null);
-	var postResult;
+	const [postResult, setPostResult] = useState(null);
 	const [loadings, setLoadings] = useState([]);
 
 	const enterLoading = (index) => {
@@ -74,16 +74,16 @@ function Conten() {
 				}
 			});
 			endLoading(0);
-			postResult = 'Đăng ký mua vé thành công!';
+			setPostResult('Đăng ký mua vé thành công!');
 			console.log(postResult);
 			success(postResult);
 		} catch (err) {
+			setPostResult(err.response?.data.message || err);
 			endLoading(0);
-			postResult = err.response?.data.message || err;
 			error(postResult);
 		} finally {
 			console.log('Post message: ', postResult);
-			postResult = null;
+			setPostResult(null);
 		}
 	};
 

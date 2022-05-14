@@ -9,14 +9,14 @@ const handler = async (req, res) => {
 		if (req.method === 'GET') {
 			const pendingTransactions =
 				await transactionController.getPendingTransactions();
-			return res.status(200).json(pendingTransactions);
+			return res.status(200).json({ result: pendingTransactions });
 		} else if (req.method == 'PUT') {
 			const { transaction_id, ticket_id } = req.body;
 			if (!input.isObjectIdValid(ticket_id)) {
-				return res.status(400).json({ message: 'Ticket ID is invalid' });
+				return res.status(400).json({ message: 'Vé không hợp lệ' });
 			}
 			if (!input.isObjectIdValid(transaction_id)) {
-				return res.status(400).json({ message: 'Transaction ID is invalid' });
+				return res.status(400).json({ message: 'Giao dịch không hợp lệ' });
 			}
 			const { result, message } = await transactionController.completePayment(
 				transaction_id,
@@ -24,9 +24,8 @@ const handler = async (req, res) => {
 			);
 			if (result) {
 				return res.status(200).json({ message: message });
-			} else {
-				return res.status(400).json({ message: message });
 			}
+			return res.status(400).json({ message: message });
 		} else if (req.method == 'POST') {
 			const { participant_id, ticket_id } = req.body;
 			if (!input.isObjectIdValid(ticket_id)) {
@@ -41,9 +40,16 @@ const handler = async (req, res) => {
 			);
 			if (result) {
 				return res.status(200).json({ message: message });
-			} else {
-				return res.status(400).json({ message: message });
 			}
+			return res.status(400).json({ message: message });
+		} else if (req.method == 'DELETE') {
+			const { transaction_id } = req.body;
+			const { result, message } =
+				transactionController.cancelTransaction(transaction_id);
+			if (result) {
+				return res.status(200).json({ message: message });
+			}
+			return res.status(400).json({ message: message });
 		}
 	} catch (e) {
 		console.log(e.message);

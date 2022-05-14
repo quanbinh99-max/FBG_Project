@@ -8,9 +8,31 @@ const StatusEnum = require('.././models/transaction').StatusEnum;
 const moment = require('moment');
 
 module.exports.getPendingTransactions = async () => {
-	const pendingTransactions = await Transaction.find({
-		paymentStatus: StatusEnum.PENDING
-	});
+	const pendingTransactions = await Transaction.aggregate([
+		{
+			$match: {
+				$and: [{ paymentStatus: StatusEnum.PENDING }]
+			}
+		},
+		{
+			$lookup: {
+				from: 'participants',
+				localField: 'participant_id',
+				foreignField: '_id',
+				as: 'participant'
+			}
+		},
+		{
+			$unwind: '$participant'
+		},
+		{
+			$project: {
+				'participant.name': 1,
+				'participant.vcsc': 1,
+				ticket_id: 1
+			}
+		}
+	]);
 	return pendingTransactions;
 };
 
@@ -75,4 +97,12 @@ module.exports.completePayment = async (transaction_id, ticket_id) => {
 		}
 	});
 	return { result: true, message: 'Giao dịch thành công' };
+};
+
+module.exports.cancelTransaction = async (transaction_id) => {
+	const transaction = await Transaction.findByIdAndDelete(transaction_id);
+	if (transaction == null) {
+		return { result: false, message: 'Huỷ giao dịch không thành công' };
+	}
+	return { result: true, message: 'Huỷ giao dịch thành công' };
 };
