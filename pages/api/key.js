@@ -1,10 +1,10 @@
 const handler = async (req, res) => {
 	const key_value = '123';
 	try {
-		res.header("Access-Control-Allow-Origin", "*");
+		res.header('Access-Control-Allow-Origin', '*');
 		res.header(
-		  "Access-Control-Allow-Headers",
-		  "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+			'Access-Control-Allow-Headers',
+			'Origin, X-Requested-With, Content-Type, Accept, Authorization'
 		);
 		if (req.method == 'POST') {
 			const { key } = req.body;
