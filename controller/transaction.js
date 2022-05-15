@@ -78,9 +78,19 @@ module.exports.completePayment = async (transaction_id, ticket_id) => {
 };
 
 module.exports.cancelTransaction = async (transaction_id) => {
-	const transaction = await Transaction.findByIdAndDelete(transaction_id);
-	if (transaction == null) {
-		return { result: false, message: 'Huỷ giao dịch không thành công' };
+	var result = false;
+	const transaction = await Transaction.findByIdAndDelete(
+		transaction_id,
+		(err, docs) => {
+			if (err) {
+				console.log(err);
+			} else {
+				result = true;
+			}
+		}
+	);
+	if (result) {
+		return { result: true, message: 'Huỷ giao dịch thành công' };
 	}
-	return { result: true, message: 'Huỷ giao dịch thành công' };
+	return { result: false, message: 'Huỷ giao dịch không thành công' };
 };
