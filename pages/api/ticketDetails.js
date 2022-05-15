@@ -5,6 +5,11 @@ db.getConnectDB();
 
 const handler = async (req, res) => {
 	try {
+		res.header("Access-Control-Allow-Origin", "*");
+		res.header(
+		  "Access-Control-Allow-Headers",
+		  "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+		);
 		if (req.method == 'POST') {
 			const { type, description, price, startingDate, endDate } = req.body;
 			await TicketDetail.create({

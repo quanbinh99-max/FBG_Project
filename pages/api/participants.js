@@ -10,6 +10,11 @@ const ticketDetailController = require('../../controller/ticket-detail');
 db.getConnectDB();
 const handler = async (req, res) => {
 	try {
+		res.header("Access-Control-Allow-Origin", "*");
+		res.header(
+		  "Access-Control-Allow-Headers",
+		  "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+		);
 		const updated_at = moment().format('YYYY-MM-DD HH:mm:ss');
 		const created_at = moment().format('YYYY-MM-DD HH:mm:ss');
 		if (req.method == 'POST') {
