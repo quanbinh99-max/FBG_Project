@@ -61,7 +61,7 @@ function Index(props) {
 				>
 					<form>
 						<input
-							type="text"
+							type="password"
 							placeholder="Vui lòng nhập key"
 							ref={post_key}
 						></input>
