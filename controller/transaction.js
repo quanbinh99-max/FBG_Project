@@ -78,7 +78,6 @@ module.exports.completePayment = async (transaction_id, ticket_id) => {
 };
 
 module.exports.cancelTransaction = async (transaction_id) => {
-	var result = false;
 	let transaction;
 	try {
 		transaction = await Transaction.findByIdAndDelete(transaction_id);
