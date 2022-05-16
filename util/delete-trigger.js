@@ -8,29 +8,32 @@ exports = async function deleteOverdueTransactions() {
 	let deletedTransaction;
 	const mongodb = context.services.get('Cluster0');
 	const transaction = mongodb.db('FBG_Soi').collection('transactions');
-	const result = await transaction.find(
-		{
-			paymentStatus: 'Chưa thanh toán'
-		},
-		{
-			created_at: 1
-		}
-	);
+	const result = await transaction
+		.find(
+			{
+				paymentStatus: 'Chưa thanh toán'
+			},
+			{
+				created_at: 1
+			}
+		)
+		.toArray();
 	let i = 0;
 	let total = result.length;
 	let count = 0;
+
 	const checkOverdue = async (item) => {
 		created_at = Date.parse(item.created_at);
-		lastingTime = (current - created_at) / 3600000; // Convert time from ms to hour
-		if (lastingTime >= 7) {
-			deletedTransaction = await transaction.findByIdAndDelete(item._id);
-			if (deletedTransaction !== null) {
+		lastingTime = current - created_at;
+		if (lastingTime >= 25200000) {
+			// compare lasting time with 7 hours in ms
+			deletedTransaction = await transaction.deleteOne({ _id: item._id });
+			if (deletedTransaction.deletedCount > 0) {
 				return true;
 			}
 		}
 		return false;
 	};
-
 	for (i = 0; i < total; i++) {
 		if (checkOverdue(result[i])) {
 			count++;
