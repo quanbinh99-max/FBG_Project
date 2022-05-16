@@ -9,7 +9,7 @@ const moment = require('moment');
 
 module.exports.getPendingTransactions = async () => {
 	const pendingTransactions = await Transaction.find({
-		paymentStatus: StatusEnum.PENDING
+		// paymentStatus: StatusEnum.PENDING
 	});
 	return pendingTransactions;
 };
@@ -81,10 +81,8 @@ module.exports.cancelTransaction = async (transaction_id) => {
 	var result = false;
 	let transaction;
 	try {
-		transaction = await Transaction.deleteOne({ _id: transaction_id });
-		console.log('OK: ', transaction);
-		if (transaction.deletedCount == 1) {
-			console.log('OK');
+		transaction = await Transaction.findByIdAndDelete(transaction_id);
+		if (transaction != null) {
 			return { result: true, message: 'Huỷ giao dịch thành công' };
 		}
 		return { result: false, message: 'Huỷ giao dịch không thành công' };
