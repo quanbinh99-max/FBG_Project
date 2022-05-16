@@ -9,7 +9,7 @@ const moment = require('moment');
 
 module.exports.getPendingTransactions = async () => {
 	const pendingTransactions = await Transaction.find({
-		// paymentStatus: StatusEnum.PENDING
+		paymentStatus: StatusEnum.PENDING
 	});
 	return pendingTransactions;
 };
