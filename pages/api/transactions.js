@@ -44,8 +44,9 @@ const handler = async (req, res) => {
 			return res.status(400).json({ message: message });
 		} else if (req.method == 'DELETE') {
 			const { transaction_id } = req.body;
-			const { result, message } =
-				transactionController.cancelTransaction(transaction_id);
+			const { result, message } = await transactionController.cancelTransaction(
+				transaction_id
+			);
 			if (result) {
 				return res.status(200).json({ message: message });
 			}

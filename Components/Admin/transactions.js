@@ -8,6 +8,7 @@ const loai3 = '6276c18f419e149a048aba1b';
 function Transactions(props) {
 	const [dataTransactions, setDataTransactions] = useState([]);
 	const [dataParticipants, setDataParticipants] = useState([]);
+	const [putResult, setPutResult] = useState(null);
 
 	useEffect(() => {
 		const participants = async () => {
@@ -59,14 +60,16 @@ function Transactions(props) {
 	};
 
 	const approveTransaction = async (transaction_id, ticket_id) => {
+		let response;
 		try {
-			const response = await apiClient.put('/transactions', {
+			response = await apiClient.put('/transactions', {
 				transaction_id: transaction_id,
 				ticket_id: ticket_id
 			});
 			success('Xác nhận thanh toán thành công');
 		} catch (err) {
 			error('Xác nhận thanh toán không thành công');
+			console.log(err);
 		} finally {
 			const newTransactions = await apiClient.get('/transactions');
 			setDataTransactions(newTransactions.data);
@@ -76,7 +79,9 @@ function Transactions(props) {
 	const cancelTransaction = async (transaction_id) => {
 		try {
 			const response = await apiClient.delete('/transactions', {
-				transaction_id: transaction_id
+				data: {
+					transaction_id: transaction_id
+				}
 			});
 			success('Huỷ thanh toán thành công');
 		} catch (err) {
@@ -161,6 +166,18 @@ function Transactions(props) {
 					}}
 				>
 					Xác nhận
+				</Button>
+			)
+		},
+		{
+			title: 'Huỷ',
+			render: (text, record) => (
+				<Button
+					onClick={() => {
+						cancelTransaction(record.transaction_id);
+					}}
+				>
+					Huỷ
 				</Button>
 			)
 		}
