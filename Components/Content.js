@@ -233,10 +233,10 @@ function Content() {
 			</section>
 			<footer className="container">
 				<div className="row">
-					<div className="col-md-4">
+					<div className="col-md-4 col-6 center nameSoi">
 						<p>SOI</p>
 					</div>
-					<div className="col-md-4 center">
+					<div className="col-md-4 col-6 center">
 						<span>Sẵn sàng để khám phá? </span>
 						<button className="btn btn-primary btn__active">Mua vé ngay</button>
 					</div>
@@ -248,7 +248,7 @@ function Content() {
 				</div>
 				<hr className="footer-line" />
 				<div id="contact" className="row">
-					<div className="col-md-4 col-xs-12">
+					<div className="col-md-4 col-xs-12 center">
 						<span>Liên hệ để được tư vấn: </span>
 						<i className="icomoon icon-phone" />
 						<span> 0123.458.456 (A.Phi)</span>
@@ -258,7 +258,7 @@ function Content() {
 						<i className="icomoon icon-phone" />
 						<span> 0456.456.5456 (C.Hoa)</span>
 					</div>
-					<div className="col-md-4 col-xs-12 lastComponent">
+					<div className="col-md-4 col-xs-12 center lastComponent">
 						<i className="fa fa-envelope" />
 						<span>fbgcaigido@gmail.com</span>
 					</div>

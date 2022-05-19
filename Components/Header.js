@@ -8,16 +8,16 @@ function Header(props) {
           <img className="logo" src="" alt="LOGO" />
           <div className="navv">
             <ul className="nav__links">
-              <li>
+              <li className="livestream">
                 <a href="#livestream">XEM LIVESTREAM</a>
               </li>
-              <li>
+              <li className="info">
                 <a href="#info">VỀ HỘI THẢO</a>
               </li>
-              <li>
+              <li className="competition">
                 <a href="#">CUỘC THI</a>
               </li>
-              <li>
+              <li className="contact">
                 <a href="#contact">LIÊN HỆ</a>
               </li>
               <li>

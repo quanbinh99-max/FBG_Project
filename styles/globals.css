@@ -3,6 +3,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap");
 /*font-family: 'Montserrat', sans-serif;*/
 @import "~antd/dist/antd.css";
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -37,9 +38,15 @@
   list-style: none;
 }
 
+.header__menu .nav__links .livestream,
+.header__menu .nav__links .info,
+.header__menu .nav__links .contact {
+  display: none;
+}
+
 .header__menu .nav__links li {
   display: inline-block;
-  padding: 10px 20px;
+  padding: 10px 5px;
 }
 
 .header__menu .nav__links li a {
@@ -123,6 +130,9 @@
 
 .livestream__pic {
   width: 100%;
+  padding-left: 2.5%;
+  padding-right: 2.5%;
+  padding-bottom: 2.5%;
 }
 
 #livestream h3 {
@@ -137,7 +147,9 @@
 }
 
 .inputCode {
-  padding: 35px 100px 0px 10px;
+  padding: 35px 10% 0px 10px;
+  text-align: justify;
+  font-size: 16px;
 }
 
 .livestream__inputCode {
@@ -146,6 +158,7 @@
   padding: 7px 15px;
   margin-bottom: 5px;
   width: 100%;
+
 }
 
 .livestream__inputCode::placeholder {
@@ -218,9 +231,12 @@
 input {
   width: 250px;
   padding: 5px 15px;
-  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-  -moz-box-sizing: border-box; /* Firefox, other Gecko */
-  box-sizing: border-box; /* Opera/IE 8+ */
+  -webkit-box-sizing: border-box;
+  /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;
+  /* Firefox, other Gecko */
+  box-sizing: border-box;
+  /* Opera/IE 8+ */
 }
 
 .ticketInfor {
@@ -296,8 +312,20 @@ footer {
   font-size: 0.9rem;
 }
 
+footer .nameSoi {
+  font-size: 250%;
+  font-weight: 600;
+
+}
+
+.footerIcon {
+  margin-top: 20px;
+  text-align: center;
+}
+
 .footerIcon i {
-  padding: 2px;
+  padding: 10px;
+  font-size: 200%;
 }
 
 .footer-line {
@@ -331,6 +359,20 @@ footer {
     left: 0.01%;
     padding: 0 15px;
   }
+  .header__menu .nav__links .livestream,
+  .header__menu .nav__links .info,
+  .header__menu .nav__links .contact {
+      display: inline-block;
+  }
+
+  .header__menu .nav__links li {
+      padding: 10px 20px;
+  }
+  .inputCode {
+    padding: 30px 10% 0px 5%;
+    text-align: justify;
+    font-size: 24px;
+  }
 
   #buyTicket h3,
   #livestream h3 {
@@ -354,14 +396,22 @@ footer {
   }
 
   .lastComponent {
+    padding-right: 0.1%;
     text-align: right;
   }
+
+  .footerIcon i {
+    padding: 0px 5px;
+    font-size: 150%;
+  }
 }
+
 #components-layout-demo-fixed-sider .logo {
   height: 32px;
   margin: 16px;
   background: rgba(255, 255, 255, 0.2);
 }
+
 .site-layout .site-layout-background {
   background: #fff;
 }
