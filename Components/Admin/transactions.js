@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import apiClient from '../../util/http-common';
 import 'antd/dist/antd.css';
 import { Table, Button, message } from 'antd';
-const loai1 = '6276c172419e149a048aba17';
-const loai2 = '6276c183419e149a048aba19';
-const loai3 = '6276c18f419e149a048aba1b';
+const loai1 = '628b2802722701e5b355740a';
+const loai2 = '628b2816722701e5b355740c';
+const loai3 = '628b2825722701e5b355740e';
 function Transactions(props) {
 	const [dataTransactions, setDataTransactions] = useState([]);
 	const [dataParticipants, setDataParticipants] = useState([]);
