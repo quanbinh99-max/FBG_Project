@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const uri =
-  "mongodb+srv://fbg_soi:GxBRpnbn9CscVS5j@cluster0.m3akm.mongodb.net/FBG_Soi?retryWrites=true&w=majority";
+  "mongodb+srv://fbg_soi:RoaPGsAoMIgdiK7n@cluster0.dvz83.mongodb.net/?retryWrites=true&w=majority";
 
 module.exports = {
   async getConnectDB() {
